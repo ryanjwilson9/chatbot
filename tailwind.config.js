@@ -5,8 +5,20 @@ module.exports = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      },
+      animation: {
+        gradient: 'moveGradient 15s ease infinite',
+      },
+      zIndex: {
+        '-1': '-1',
+        '-2': '-2',
+      }
+    },
   },
   plugins: [],
 } 

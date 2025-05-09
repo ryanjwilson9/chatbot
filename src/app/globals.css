@@ -2,34 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-rgb: 255, 255, 255;
+@layer base {
+  :root {
+    --background-start: 17 24 39;
+    --background-end: 31 41 55;
+    --accent-1: 147 51 234;
+    --accent-2: 79 70 229;
+  }
+
+  body {
+    @apply text-white min-h-screen relative overflow-x-hidden;
+  }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-rgb));
-  min-height: 100vh;
+@layer components {
+  .bg-gradient {
+    background: linear-gradient(
+      -45deg,
+      rgb(var(--background-start) / 0.95) 0%,
+      rgb(var(--accent-1) / 0.3) 25%,
+      rgb(var(--accent-2) / 0.3) 75%,
+      rgb(var(--background-end) / 0.95) 100%
+    );
+    background-size: 400% 400%;
+    animation: moveGradient 15s ease infinite;
+    z-index: -1;
+  }
+
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+    z-index: 0;
+  }
+}
+
+@layer utilities {
+  .animate-gradient {
+    animation: moveGradient 15s ease infinite;
+  }
+}
+
+@keyframes moveGradient {
+  0% {
+    background-position: 0% 50%;
+    transform: rotate(0deg);
+  }
+  50% {
+    background-position: 100% 50%;
+    transform: rotate(1deg);
+  }
+  100% {
+    background-position: 0% 50%;
+    transform: rotate(0deg);
+  }
 }
 
 .font-satisfy {
   font-family: var(--font-satisfy);
-}
-
-@keyframes gradient {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.animate-gradient {
-  background-size: 200% auto;
-  animation: gradient 4s linear infinite;
 } 
